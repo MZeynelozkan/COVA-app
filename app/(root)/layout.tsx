@@ -9,11 +9,11 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <main className="flex h-screen flex-col">
+    <main className="relative">
       <Navbar />
-      <div className="flex flex-1 px-6 py-[20px]">
+      <div className="flex px-6">
         <LeftSidebar />
-        <section className="grow overflow-y-auto">{children}</section>
+        <section>{children}</section>
       </div>
     </main>
   );
