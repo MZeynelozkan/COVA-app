@@ -1,5 +1,6 @@
 import React from "react";
 
+import LeftSidebar from "@/components/shared/LeftSidebar";
 import Navbar from "@/components/shared/Navbar";
 
 interface Props {
@@ -8,10 +9,13 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className="h-screen">
+    <main className="flex h-screen flex-col">
       <Navbar />
-      <main>{children}</main>
-    </div>
+      <div className="flex flex-1 px-6 py-[20px]">
+        <LeftSidebar />
+        <section className="grow overflow-y-auto">{children}</section>
+      </div>
+    </main>
   );
 };
 
