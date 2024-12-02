@@ -22,7 +22,7 @@ const LeftSidebar = () => {
   });
 
   return (
-    <div className="flex size-full h-[calc(100vh-64px)] max-w-[320px] flex-col justify-between px-4 pb-5 pt-9">
+    <div className="flex size-full h-[calc(100vh-65px)] max-w-[320px] flex-col justify-between px-4 pb-5 pt-9">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
           {/** TODO: bunu Next image olarak degis */}
