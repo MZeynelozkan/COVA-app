@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import GlobalSearch from "../search/GlobalSearch";
+import { ModeToggle } from "../theme/ModeToggle";
 
 const Navbar = () => {
   return (
@@ -17,9 +18,9 @@ const Navbar = () => {
           Collectify
         </h1>
       </div>
-      <div className="flex gap-8">
+      <div className="mr-[40px] flex items-center gap-8">
         <GlobalSearch />
-        <p className="mr-8">TemaDegisme</p>
+        <ModeToggle />
       </div>
     </div>
   );

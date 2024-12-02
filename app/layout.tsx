@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 // eslint-disable-next-line camelcase
 import { Plus_Jakarta_Sans } from "next/font/google";
+
 import "./globals.css";
 import "@/styles/theme.css";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,7 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={plusJakartaSans.className}>{children}</body>
+      <body className={plusJakartaSans.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
