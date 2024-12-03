@@ -19,7 +19,7 @@ const ItemCard = () => {
       <CardContent className="p-0">
         <p className="text-light_dark text-base leading-[24px]">Creator Name</p>
         <p className="font-normal leading-[21px] text-[#6B6B6B] dark:text-white">
-          Posted Time
+          Posted Times
         </p>
       </CardContent>
     </Card>
