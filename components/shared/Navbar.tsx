@@ -8,7 +8,7 @@ import { ModeToggle } from "../theme/ModeToggle";
 
 const Navbar = () => {
   return (
-    <div className="absolute z-50 flex h-[65px] w-full items-center justify-between border-b px-10 py-3">
+    <div className="background-light_dark fixed z-50 flex h-[65px] w-full items-center justify-between border-b px-10 py-3">
       <Link
         href="/"
         className="flex h-[23] w-full max-w-[166px] items-center gap-4"
