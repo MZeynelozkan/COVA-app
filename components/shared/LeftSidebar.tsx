@@ -23,7 +23,7 @@ const LeftSidebar = () => {
   });
 
   return (
-    <div className="flex size-full h-[calc(100vh-65px)] max-w-[320px] flex-col justify-between px-4 pb-5 pt-9 max-md:w-[60px] max-md:px-2 max-sm:hidden">
+    <div className="sticky top-0 flex size-full h-[calc(100vh-65px)] max-w-[320px]  flex-col justify-between px-4 pb-5 pt-9  max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
           {/** TODO: bunu Next image olarak degis */}
@@ -33,7 +33,7 @@ const LeftSidebar = () => {
             alt="profile image"
             src="/assets/icons/profile.png"
           />
-          <div className="flex flex-col max-md:hidden">
+          <div className="flex flex-col max-lg:hidden">
             <h2 className="text-base font-[500]">Navigation</h2>
             <p className="text-sm leading-[21px] text-[#6B6B6B]">
               Explore Content
@@ -59,7 +59,7 @@ const LeftSidebar = () => {
                   height={20}
                   className="dark:invert"
                 />
-                <span className="max-md:hidden">{item.label}</span>
+                <span className="max-lg:hidden">{item.label}</span>
               </Link>
             ) : null
           )}
@@ -67,17 +67,17 @@ const LeftSidebar = () => {
       </div>
       <div className=" flex flex-col gap-3">
         <FaSignInAlt
-          className="ml-4 hidden dark:text-white max-md:block"
+          className="ml-4 hidden dark:text-white max-lg:block"
           width={20}
         />
-        <Button className="rounded-[24px] px-5 py-0 text-[16px] font-bold max-md:hidden">
+        <Button className="rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
           Login
         </Button>
         <FaUser
-          className="ml-4 hidden dark:text-white max-md:block"
+          className="ml-4 hidden dark:text-white max-lg:block"
           width={20}
         />
-        <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-md:hidden">
+        <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
           Sign Up
         </Button>
       </div>
