@@ -28,10 +28,10 @@ const Navbar = () => {
         <GlobalSearch />
         <ModeToggle />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="sm:hidden">
         <ModeToggle />
-        <MobileNavbar />
       </div>
+      <MobileNavbar />
     </div>
   );
 };
