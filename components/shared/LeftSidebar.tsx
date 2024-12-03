@@ -23,7 +23,7 @@ const LeftSidebar = () => {
   });
 
   return (
-    <div className="sticky left-0 top-0 flex h-screen w-full max-w-[320px]  flex-col justify-between pt-36   max-lg:w-[60px] max-lg:px-2  max-sm:hidden overflow-y-auto">
+    <div className="sticky left-0 top-0 flex h-screen w-full max-w-[320px]  flex-col justify-between pt-32  max-lg:w-[60px] max-lg:px-2  max-sm:hidden overflow-y-auto">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex items-center gap-3">
           {/** TODO: bunu Next image olarak degis */}
