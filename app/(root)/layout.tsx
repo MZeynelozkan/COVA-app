@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
       <Navbar />
       <div className="flex gap-1 px-6 max-lg:px-2 max-md:py-0">
         <LeftSidebar />
-        <section className="flex min-h-screen flex-1  pb-6 pt-24">
+        <section className="flex min-h-dvh flex-1  pb-6 pt-24">
           {children}
         </section>
       </div>

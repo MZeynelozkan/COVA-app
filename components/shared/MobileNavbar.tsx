@@ -42,7 +42,10 @@ const MobileNavbar = () => {
             />
           </svg>
         </SheetTrigger>
-        <SheetContent side="left" className="bg-white dark:bg-gray-900">
+        <SheetContent
+          side="left"
+          className="overflow-y-auto bg-white dark:bg-gray-900"
+        >
           {/* Profil Bölümü */}
           <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
             <Image
