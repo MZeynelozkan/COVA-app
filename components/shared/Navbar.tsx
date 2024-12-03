@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import MobileNavbar from "./MobileNavbar";
 import GlobalSearch from "../search/GlobalSearch";
 import { ModeToggle } from "../theme/ModeToggle";
 
@@ -23,10 +24,11 @@ const Navbar = () => {
           Collectify
         </h1>
       </Link>
-      <div className="mr-[40px] flex items-center gap-8">
+      <div className="mr-[40px] flex items-center gap-8 max-sm:hidden">
         <GlobalSearch />
         <ModeToggle />
       </div>
+      <MobileNavbar />
     </div>
   );
 };
