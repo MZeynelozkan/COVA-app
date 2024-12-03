@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const ItemCard = () => {
   return (
-    <Card className="flex w-full max-w-[499px] flex-col  gap-3 border-none pb-3 shadow-none">
-      <CardHeader className="relative h-0 w-full pb-[133%]">
+    <Card className="flex size-full max-w-[499px] flex-col gap-3  border-none pb-3 shadow-none">
+      <CardHeader className="relative h-0 w-full pb-[120%]">
         {" "}
         {/* Aspect Ratio */}
         <Image
