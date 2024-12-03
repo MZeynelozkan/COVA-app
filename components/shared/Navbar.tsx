@@ -17,8 +17,9 @@ const Navbar = () => {
           width={16}
           height={16}
           src="/assets/images/Logo.svg"
+          className="dark:invert"
         />
-        <h1 className="text-[18px] font-bold leading-[23px] text-black dark:text-black">
+        <h1 className="text-[18px] font-bold leading-[23px] text-black dark:text-white">
           Collectify
         </h1>
       </Link>

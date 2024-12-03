@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* Arka Plan Renkleri */
+  .background-light_dark {
+    @apply bg-white dark:bg-black;
+  }
+
+  .text-light_dark {
+    @apply text-black dark:text-white;
+  }
+
+  .bg-sidebarLinks-light_dark {
+    @apply bg-[#EDEDED] border border-transparent rounded-lg dark:border-white dark:bg-transparent;
+  }
+}

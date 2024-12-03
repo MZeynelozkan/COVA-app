@@ -9,9 +9,9 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <main className="relative">
+    <main className="background-light_dark relative">
       <Navbar />
-      <div className="flex px-6">
+      <div className="flex px-6 max-md:px-0">
         <LeftSidebar />
         <section>{children}</section>
       </div>
