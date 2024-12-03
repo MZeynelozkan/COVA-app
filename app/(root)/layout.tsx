@@ -11,9 +11,9 @@ const Layout = ({ children }: Props) => {
   return (
     <main className="background-light_dark relative">
       <Navbar />
-      <div className="flex  ">
+      <div className="flex px-4">
         <LeftSidebar />
-        <section className="flex min-h-screen flex-1 flex-col px-6 pb-5 pt-24">
+        <section className="flex min-h-screen flex-1 flex-col pb-5 pt-24">
           {children}
         </section>
       </div>
