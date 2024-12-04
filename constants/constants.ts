@@ -9,12 +9,12 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/artists.svg",
     route: "/top-artists",
-    label: "Top Artist",
+    label: "Top Artists",
   },
   {
     imgURL: "/assets/icons/products.svg",
     route: "/popular-products",
-    label: "Popular Products",
+    label: "Popular Products Collections",
   },
   {
     imgURL: "/assets/icons/arts.svg",
