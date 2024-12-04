@@ -12,7 +12,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Collectify",
+  title: "COVA",
   description: "Sanat, müzik ve ürün koleksiyonlarını keşfedin",
   keywords: "sanat, müzik, koleksiyonlar, puanlama, keşfet, etkileşim, içerik",
 };

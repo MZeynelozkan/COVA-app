@@ -21,7 +21,7 @@ const Navbar = () => {
           className="dark:invert"
         />
         <h1 className="text-[18px] font-bold leading-[23px] text-black dark:text-white">
-          Collectify
+          COVA
         </h1>
       </Link>
       <div className="mr-[40px] flex items-center gap-8 max-sm:hidden">
