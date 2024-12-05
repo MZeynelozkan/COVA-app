@@ -70,13 +70,15 @@ const LeftSidebar = () => {
           className="ml-4 hidden dark:text-white max-lg:block"
           width={20}
         />
-        <Button className="rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
-          Login
-        </Button>
-        <FaUser
-          className="ml-4 hidden dark:text-white max-lg:block"
-          width={20}
-        />
+        <Link href="/sign-in">
+          <Button className="w-full rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
+            Login
+          </Button>
+          <FaUser
+            className="ml-4 hidden dark:text-white max-lg:block"
+            width={20}
+          />
+        </Link>
         <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
           Sign Up
         </Button>

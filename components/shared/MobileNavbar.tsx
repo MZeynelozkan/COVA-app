@@ -94,9 +94,11 @@ const MobileNavbar = () => {
 
           {/* Login ve Sign Up Butonları */}
           <div className="flex flex-col gap-3 border-t border-gray-200 p-4 dark:border-gray-700">
-            <Button className="rounded-[24px] px-5 py-2 text-[16px] font-bold">
-              Login
-            </Button>
+            <Link href="/sign-in">
+              <Button className="w-full rounded-[24px] px-5 py-2 text-[16px] font-bold">
+                Login
+              </Button>
+            </Link>
             <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-2 text-[16px] font-bold text-black hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700">
               Sign Up
             </Button>
