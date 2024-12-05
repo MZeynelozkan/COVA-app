@@ -13,7 +13,7 @@ import { sidebarLinks } from "@/constants/constants";
 import { Button } from "../ui/button";
 
 const MobileNavbar = () => {
-  const { data: session, status } = useSession(); // Access session and status
+  const { data: session, status } = useSession();
   const pathname = usePathname();
 
   // Destructure user data with fallbacks
