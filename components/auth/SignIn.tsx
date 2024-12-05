@@ -6,7 +6,10 @@ import { Button } from "../ui/button";
 
 export default function SignIn() {
   return (
-    <Button className="w-[280px]" onClick={() => signIn("github")}>
+    <Button
+      className="w-[280px]"
+      onClick={() => signIn("github", { redirectTo: "/" })}
+    >
       Sign-in
     </Button>
   );
