@@ -1,8 +1,10 @@
 "use client";
 
+import { Loader } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import React from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 
@@ -11,6 +13,10 @@ import { sidebarLinks } from "@/constants/constants";
 import { Button } from "../ui/button";
 
 const LeftSidebar = () => {
+  const { data: session, status } = useSession(); // Access status for loading state
+
+  const { image, name } = session?.user || {};
+
   const pathname = usePathname();
 
   // active state
@@ -23,18 +29,23 @@ const LeftSidebar = () => {
   });
 
   return (
-    <div className="sticky top-0 flex h-dvh w-full max-w-[320px]  flex-col justify-between  overflow-y-auto  px-4 pb-5 pt-24  max-lg:w-[60px] max-lg:px-2  max-sm:hidden">
+    <div className="sticky top-0 flex h-dvh w-full max-w-[320px] flex-col justify-between overflow-y-auto px-4 pb-5 pt-24 max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
-          {/** TODO: bunu Next image olarak degis */}
-          <Image
-            width={40}
-            height={40}
-            alt="profile image"
-            src="/assets/icons/profile.png"
-          />
+          {/** Display Loader if image is not yet available */}
+          {status === "loading" || !image ? (
+            <Loader className="animate-spin" />
+          ) : (
+            <Image
+              width={40}
+              className="rounded-full"
+              height={40}
+              alt="profile image"
+              src={image || "/assets/icons/profile.png"}
+            />
+          )}
           <div className="flex flex-col max-lg:hidden">
-            <h2 className="text-base font-[500]">Navigation</h2>
+            <h2 className="text-base font-[500]">{name || "Guest"}</h2>
             <p className="text-sm leading-[21px] text-[#6B6B6B]">
               Explore Content
             </p>
@@ -65,24 +76,37 @@ const LeftSidebar = () => {
           )}
         </div>
       </div>
-      <div className=" flex flex-col gap-3">
-        <FaSignInAlt
-          className="ml-4 hidden dark:text-white max-lg:block"
-          width={20}
-        />
-        <Link href="/sign-in">
-          <Button className="w-full rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
-            Login
-          </Button>
-          <FaUser
+      {status === "loading" ? ( // Show loader while session is being fetched
+        <div className="flex justify-center py-4">
+          <Loader className="animate-spin" />
+        </div>
+      ) : !session ? (
+        <div className="flex flex-col gap-3">
+          <FaSignInAlt
             className="ml-4 hidden dark:text-white max-lg:block"
             width={20}
           />
-        </Link>
-        <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
-          Sign Up
+          <Link href="/sign-in">
+            <Button className="w-full rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
+              Login
+            </Button>
+            <FaUser
+              className="ml-4 hidden dark:text-white max-lg:block"
+              width={20}
+            />
+          </Link>
+          <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
+            Sign Up
+          </Button>
+        </div>
+      ) : (
+        <Button
+          onClick={() => signOut()}
+          className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden"
+        >
+          Sign Out
         </Button>
-      </div>
+      )}
     </div>
   );
 };

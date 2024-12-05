@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-// eslint-disable-next-line camelcase
+// eslint-disable-next-line camelcase, import/order
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 import "./globals.css";
 import "@/styles/theme.css";
+import { SessionProvider } from "next-auth/react";
+
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -31,7 +33,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SessionProvider>{children}</SessionProvider>
         </ThemeProvider>
       </body>
     </html>
