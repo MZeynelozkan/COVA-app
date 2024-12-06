@@ -31,7 +31,7 @@ const LeftSidebar = () => {
 
   return (
     <div className="sticky top-0 flex h-dvh w-full max-w-[320px] flex-col justify-between overflow-y-auto px-4 pb-5 pt-24 max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
-      <div className="flex flex-col gap-4 max-[1023px]:items-center">
+      <div className="flex flex-1 flex-col gap-4 max-[1023px]:items-center">
         <div className="flex items-center gap-3">
           {/** Display Loader if image is not yet available */}
           {status === "loading" || !image ? (

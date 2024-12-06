@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 const ItemCard = () => {
   return (
-    <Card className="flex  size-full  flex-col gap-3  border-none pb-3 shadow-none">
+    <Card className="flex  size-full max-w-[499px] flex-col gap-3  border-none pb-3 shadow-none">
       <CardHeader className="relative h-0 w-full pb-[140%]">
         {" "}
         {/* Aspect Ratio */}
