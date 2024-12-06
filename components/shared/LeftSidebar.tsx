@@ -6,7 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import React from "react";
-import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { MdOutlineLogout } from "react-icons/md";
 
 import { sidebarLinks } from "@/constants/constants";
 
@@ -30,7 +31,7 @@ const LeftSidebar = () => {
 
   return (
     <div className="sticky top-0 flex h-dvh w-full max-w-[320px] flex-col justify-between overflow-y-auto px-4 pb-5 pt-24 max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 max-[1023px]:items-center">
         <div className="flex items-center gap-3">
           {/** Display Loader if image is not yet available */}
           {status === "loading" || !image ? (
@@ -82,10 +83,6 @@ const LeftSidebar = () => {
         </div>
       ) : !session ? (
         <div className="flex flex-col gap-3">
-          <FaSignInAlt
-            className="ml-4 hidden dark:text-white max-lg:block"
-            width={20}
-          />
           <Link href="/sign-in">
             <Button className="w-full rounded-[24px] px-5 py-0 text-[16px] font-bold max-lg:hidden">
               Login
@@ -95,17 +92,20 @@ const LeftSidebar = () => {
               width={20}
             />
           </Link>
-          <Button className="rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
-            Sign Up
-          </Button>
         </div>
       ) : (
-        <Button
-          onClick={() => signOut()}
-          className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden"
-        >
-          Sign Out
-        </Button>
+        <>
+          <MdOutlineLogout
+            onClick={() => signOut()}
+            className="hidden h-4 w-5 self-center hover:cursor-pointer max-lg:block"
+          />
+          <Button
+            onClick={() => signOut()}
+            className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden"
+          >
+            Sign Out
+          </Button>
+        </>
       )}
     </div>
   );
