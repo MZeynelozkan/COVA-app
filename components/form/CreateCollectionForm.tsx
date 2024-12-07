@@ -23,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createCollection } from "@/lib/actions/collection.action";
 import { formSchema } from "@/lib/validation";
 
 interface Props {
@@ -35,6 +36,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
   const [coverImg, setCoverImg] = useState("");
   const [loading, setLoading] = useState(false); // To handle loading state for image upload
 
+  const parsedUserId = JSON.parse(userId);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,9 +51,20 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
     form.setValue("coverImg", coverImg); // Update the form's coverImg value when coverImg state changes
   }, [coverImg, form]);
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Handle form submission
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { type, name, specification, coverImg } = values;
+
+    try {
+      await createCollection({
+        coverImg,
+        type,
+        userId: parsedUserId,
+        specification,
+        name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
