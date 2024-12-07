@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { CldUploadButton, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,6 +36,7 @@ interface Props {
 const CreateCollectionForm = ({ userId, type, path }: Props) => {
   const [coverImg, setCoverImg] = useState("");
   const [loading, setLoading] = useState(false); // To handle loading state for image upload
+  const router = useRouter();
 
   const parsedUserId = JSON.parse(userId);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,6 +64,8 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
         specification,
         name,
       });
+
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
