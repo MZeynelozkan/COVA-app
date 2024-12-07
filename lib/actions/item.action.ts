@@ -12,7 +12,7 @@ export async function createItem(params: CreateItemParams) {
 
   const collection = await getCollectionById({ id: collectionId });
 
-  if (collection.items.length > 10) return;
+  if (collection.items.length >= 10) return;
 
   try {
     await prisma.item.create({
