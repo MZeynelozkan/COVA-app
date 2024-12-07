@@ -92,7 +92,7 @@ const AddItemForm = ({ collectionId }: Props) => {
         </div>
 
         <div>
-          <label className="text-black dark:text-white">Specification</label>
+          <label className="text-black dark:text-white">Link</label>
           <Input
             placeholder="Enter Link"
             {...form.register("link")}
