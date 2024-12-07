@@ -50,7 +50,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
   });
 
   useEffect(() => {
-    form.setValue("coverImg", coverImg); // Update the form's coverImg value when coverImg state changes
+    form.setValue("coverImg", coverImg);
   }, [coverImg, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

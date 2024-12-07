@@ -20,9 +20,14 @@ const Page = async ({ params }: ParamsProps) => {
         <h1 className="text-light_dark text-4xl font-extrabold leading-[45px] tracking-[-1px] max-md:text-xl">
           {collection.name}
         </h1>
+        <div className="flex flex-col">
+          {collection.items.map((item) => (
+            <h1 key={item.id}>{item.link}</h1>
+          ))}
+        </div>
 
         {session?.user?.id === collection.userId && (
-          <Link href="/add">
+          <Link href={`/collection/${id}/add`}>
             <Button className="flex w-full items-center rounded-[24px] p-5">
               Add <span className="font-bold">{collection.type}</span>
             </Button>

@@ -17,3 +17,14 @@ export interface GetCollectionsParams {
 export interface GetCollectionById {
   id: string;
 }
+
+export interface CreateItemParams {
+  collectionId: string;
+  name: string;
+  image: string;
+  link: string;
+}
+
+export interface GetItemsByCollectionIdParams {
+  collectionId: string;
+}

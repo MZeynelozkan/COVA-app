@@ -8,6 +8,12 @@ export const formSchema = z.object({
     CollectionType.PRODUCT,
     CollectionType.MUSIC,
   ]),
-  specification: z.string().min(0).max(10),
+  specification: z.string().min(0).max(20),
   coverImg: z.string().min(0),
+});
+
+export const itemSchema = z.object({
+  name: z.string().min(5).max(20),
+  link: z.string().min(5),
+  image: z.string().min(10),
 });
