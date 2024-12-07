@@ -13,3 +13,7 @@ export interface GetCollectionsParams {
   pageSize: number;
   type: Prisma.CollectionType;
 }
+
+export interface GetCollectionById {
+  id: string;
+}
