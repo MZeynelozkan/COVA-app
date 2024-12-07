@@ -51,7 +51,7 @@ const Page = async ({ params }: ParamsProps) => {
               <h2 className="text-lg font-semibold dark:text-white">
                 {item.name}
               </h2>
-              <Link href={item.link} passHref>
+              <Link href={item.link} target="_blank" passHref>
                 <span className="text-blue-500 hover:underline dark:text-blue-400">
                   View Item
                 </span>
