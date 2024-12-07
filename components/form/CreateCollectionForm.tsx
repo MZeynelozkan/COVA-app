@@ -74,8 +74,9 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
           onSuccess={(result, { widget }) => {
             const imageUrl = (result?.info as CloudinaryUploadWidgetInfo).url;
             setCoverImg(imageUrl);
+            setLoading(false);
           }}
-          onClick={() => setLoading(true)} // Set loading to true when the button is clicked
+          onClick={() => setLoading(true)}
         >
           {loading ? "Uploading..." : "Upload Image"}
         </CldUploadButton>
