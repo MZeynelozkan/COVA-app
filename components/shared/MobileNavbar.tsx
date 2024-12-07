@@ -121,12 +121,19 @@ const MobileNavbar = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={() => signOut()}
-                className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED]"
-              >
-                Sign Out
-              </Button>
+              <>
+                <Link href="/create">
+                  <Button className="mb-5 w-full rounded-[24px] bg-blue-400 px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] ">
+                    Create Collection
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => signOut()}
+                  className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED]"
+                >
+                  Sign Out
+                </Button>
+              </>
             )}
           </div>
         </SheetContent>

@@ -89,6 +89,7 @@ model Collection {
   userId         String
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   items          Item[]
+  coverImg       String?
 
   @@unique([name, userId])
 }

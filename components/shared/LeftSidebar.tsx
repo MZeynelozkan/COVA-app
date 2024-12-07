@@ -95,6 +95,11 @@ const LeftSidebar = () => {
         </div>
       ) : (
         <>
+          <Link href="/create">
+            <Button className="mb-5 w-full rounded-[24px] bg-blue-400 px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] max-lg:hidden">
+              Create Collection
+            </Button>
+          </Link>
           <MdOutlineLogout
             onClick={() => signOut()}
             className="hidden h-4 w-5 self-center hover:cursor-pointer max-lg:block"
