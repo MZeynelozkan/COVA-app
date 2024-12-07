@@ -88,7 +88,7 @@ model Collection {
   specification  String?
   userId         String
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items          Item[]
+  items          Item[]          // Buradaki ilişki değişmeden kalacak
   coverImg       String?
 
   @@unique([name, userId])
@@ -100,11 +100,12 @@ model Item {
   name         String
   image        String
   link         String
-  collectionId String
-  collection   Collection   @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String?      // Buradaki collectionId nullable olmalı
+  collection   Collection?  @relation(fields: [collectionId], references: [id], onDelete: Cascade) // collection nullable
 
   createdAt    DateTime     @default(now())
 }
+
 
 // Enum for collection types
 enum CollectionType {
