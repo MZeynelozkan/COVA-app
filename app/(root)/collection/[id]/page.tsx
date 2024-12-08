@@ -2,27 +2,37 @@ import Image from "next/image"; // Import Image component from Next.js
 import Link from "next/link";
 import React from "react";
 
-import { auth } from "@/auth";
+import Save from "@/components/interaction/Save";
 import { Button } from "@/components/ui/button";
 import { getCollectionById } from "@/lib/actions/collection.action";
+import { getUser } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types/types";
 
 const Page = async ({ params }: ParamsProps) => {
-  const session = await auth();
   const { id } = params;
+  const user = await getUser();
 
   const collection = await getCollectionById({ id });
-
-  console.log(collection);
+  console.log("user", user);
 
   return (
     <div className="flex size-full min-h-screen flex-col bg-white p-6 dark:bg-gray-900">
       <div className="flex flex-wrap items-center justify-between">
-        <h1 className="text-4xl font-extrabold leading-[45px] tracking-[-1px] dark:text-white max-md:text-2xl">
-          {collection.name}
+        <h1 className="flex items-center gap-2 text-4xl font-extrabold leading-[45px] tracking-[-1px] dark:text-white max-md:text-2xl">
+          {collection.name}{" "}
+          <span>
+            {user?.id && (
+              <Save
+                collectionId={id}
+                userId={user?.id}
+                hasSaved={user.savedCollections.some((item) => item.id === id)}
+                saved={collection.savedCount}
+              />
+            )}
+          </span>
         </h1>
 
-        {session?.user?.id === collection.userId && (
+        {user?.id === collection.userId && collection.items.length <= 10 && (
           <Link href={`/collection/${id}/add`}>
             <Button className="flex w-full items-center rounded-[24px] bg-blue-600 p-5 text-white dark:bg-blue-700">
               Add <span className="font-bold">{collection.type}</span>
@@ -30,8 +40,8 @@ const Page = async ({ params }: ParamsProps) => {
           </Link>
         )}
       </div>
-      <div className="mt-6 flex flex-wrap justify-between gap-5">
-        {collection.items.map((item) => (
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-5 max-md:justify-center">
+        {collection.items.map((item, index) => (
           <div
             key={item.id}
             className="w-full max-w-[300px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"

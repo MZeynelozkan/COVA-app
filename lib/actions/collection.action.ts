@@ -8,6 +8,7 @@ import {
   CreateCollectionParams,
   GetCollectionById,
   GetCollectionsParams,
+  SaveCollectionParams,
 } from "./shared.types";
 
 export async function createCollection(params: CreateCollectionParams) {
@@ -82,5 +83,73 @@ export async function getCollectionById(params: GetCollectionById) {
     throw error;
   } finally {
     await prisma.$disconnect();
+  }
+}
+
+export async function saveCollections(params: SaveCollectionParams) {
+  const { collectionId, userId } = params;
+
+  try {
+    await prisma.collection.updateMany({
+      where: {
+        id: collectionId,
+      },
+      data: {
+        savedCount: {
+          increment: 1,
+        },
+      },
+    });
+
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        savedCollections: {
+          connect: {
+            id: collectionId,
+          },
+        },
+      },
+    });
+
+    revalidatePath(`/`);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function unsaveCollections(params: SaveCollectionParams) {
+  const { collectionId, userId } = params;
+
+  try {
+    await prisma.collection.updateMany({
+      where: { id: collectionId },
+      data: {
+        savedCount: {
+          decrement: 1,
+        },
+      },
+    });
+
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        savedCollections: {
+          disconnect: {
+            id: collectionId,
+          },
+        },
+      },
+    });
+
+    revalidatePath(`/`);
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }

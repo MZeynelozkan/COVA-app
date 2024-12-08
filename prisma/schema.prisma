@@ -15,9 +15,9 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  collections   Collection[]
-  // Optional for WebAuthn support
   Authenticator Authenticator[]
+  collections   Collection[] // Kullanıcının oluşturduğu koleksiyonlar
+  savedCollections Collection[] @relation("SavedCollections") // Kaydedilen koleksiyonlar
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,7 +88,8 @@ model Collection {
   specification  String?
   userId         String
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items          Item[]          // Buradaki ilişki değişmeden kalacak
+  savedByUsers   User[]          @relation("SavedCollections") // Kaydeden kullanıcılar
+  items          Item[]
   coverImg       String?
 
   @@unique([name, userId])

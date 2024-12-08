@@ -28,3 +28,8 @@ export interface CreateItemParams {
 export interface GetItemsByCollectionIdParams {
   collectionId: string;
 }
+
+export interface SaveCollectionParams {
+  collectionId: string;
+  userId: string;
+}
