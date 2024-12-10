@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import prisma from "@/prisma";
 
 import getSession from "../getSession";
@@ -103,5 +105,53 @@ export async function getTopArtists() {
   } catch (error) {
     console.error(error);
     throw error;
+  }
+}
+
+export async function addItemYourCollection(params: {
+  collectionId: string;
+  userId: string;
+  itemId: string;
+}) {
+  const { collectionId, userId, itemId } = params;
+
+  try {
+    // 1. Kullanıcının koleksiyonu var mı kontrol et
+    const collection = await prisma.collection.findFirst({
+      where: {
+        id: collectionId,
+        userId, // Koleksiyonun bu kullanıcıya ait olduğundan emin ol
+      },
+    });
+
+    if (!collection) {
+      throw new Error("Koleksiyon bulunamadı veya bu kullanıcıya ait değil.");
+    }
+
+    // 2. Eklenmek istenen item var mı kontrol et
+    const item = await prisma.item.findUnique({
+      where: { id: itemId },
+    });
+
+    if (!item) {
+      throw new Error("Eklenmek istenen öğe bulunamadı.");
+    }
+
+    // 3. Öğeyi koleksiyonla ilişkilendir
+    await prisma.collection.update({
+      where: { id: collectionId },
+      data: {
+        items: {
+          connect: { id: itemId }, // İlgili item'ı koleksiyonla ilişkilendir
+        },
+      },
+    });
+
+    revalidatePath(`/collection/${collectionId}`);
+
+    // 4. Başarılı geri dönüş
+    return { message: "Öğe başarıyla koleksiyona eklendi.", collection, item };
+  } catch (error: any) {
+    return { error: error.message };
   }
 }

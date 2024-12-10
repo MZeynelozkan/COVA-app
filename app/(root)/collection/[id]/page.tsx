@@ -2,6 +2,7 @@ import Image from "next/image"; // Import Image component from Next.js
 import Link from "next/link";
 import React from "react";
 
+import AddYourCollection from "@/components/interaction/AddYourCollection";
 import Save from "@/components/interaction/Save";
 import { Button } from "@/components/ui/button";
 import { getCollectionById } from "@/lib/actions/collection.action";
@@ -58,9 +59,16 @@ const Page = async ({ params }: ParamsProps) => {
               />
             </div>
             <div className="p-4">
-              <h2 className="text-lg font-semibold dark:text-white">
-                {item.name}
-              </h2>
+              <div className="flex justify-between">
+                <h2 className="text-lg font-semibold dark:text-white">
+                  {item.name}
+                </h2>
+                <AddYourCollection
+                  userCollections={user?.collections || []}
+                  userId={user?.id!}
+                  item={item}
+                />
+              </div>
               <Link href={item.link} target="_blank" passHref>
                 <span className="text-blue-500 hover:underline dark:text-blue-400">
                   View Item

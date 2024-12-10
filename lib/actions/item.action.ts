@@ -4,29 +4,30 @@ import { revalidatePath } from "next/cache";
 
 import prisma from "@/prisma";
 
-import { getCollectionById } from "./collection.action";
 import { CreateItemParams, GetItemsByCollectionIdParams } from "./shared.types";
 
 export async function createItem(params: CreateItemParams) {
   const { collectionId, name, link, image: imageUrl } = params;
 
-  const collection = await getCollectionById({ id: collectionId });
-
-  if (collection.items.length >= 10) return;
-
   try {
-    await prisma.item.create({
+    // 1. Yeni öğeyi oluştur ve koleksiyonla ilişkilendir
+    const newItem = await prisma.item.create({
       data: {
         name,
         link,
         image: imageUrl,
-        collectionId,
+        collections: {
+          connect: { id: collectionId }, // Koleksiyonla ilişki kur
+        },
       },
     });
 
+    // 2. Sayfayı yeniden doğrula
     revalidatePath(`/collection/${collectionId}`);
+
+    return newItem;
   } catch (error) {
-    console.log(error);
+    console.error("Error creating item:", error);
     throw error;
   }
 }
@@ -39,13 +40,15 @@ export async function getItemsByCollectionId(
   try {
     const items = await prisma.item.findMany({
       where: {
-        collectionId,
+        collections: {
+          some: { id: collectionId }, // Koleksiyonla ilişkili öğeleri al
+        },
       },
     });
 
     return items;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching items by collectionId:", error);
     throw error;
   }
 }

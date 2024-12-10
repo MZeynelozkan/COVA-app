@@ -88,21 +88,19 @@ model Collection {
   specification  String?
   userId         String
   user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  savedByUsers   User[]          @relation("SavedCollections") // Kaydeden kullanıcılar
-  items          Item[]
+  savedByUsers   User[]          @relation("SavedCollections")
+  items          Item[]          @relation("CollectionItems") // Prisma otomatik ara tablo oluşturur
   coverImg       String?
 
   @@unique([name, userId])
 }
 
-// Item model
 model Item {
   id           String       @id @default(cuid())
   name         String
   image        String
   link         String
-  collectionId String?      // Buradaki collectionId nullable olmalı
-  collection   Collection?  @relation(fields: [collectionId], references: [id], onDelete: Cascade) // collection nullable
+  collections  Collection[] @relation("CollectionItems") // Prisma otomatik ara tablo oluşturur
 
   createdAt    DateTime     @default(now())
 }

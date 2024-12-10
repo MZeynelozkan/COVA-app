@@ -62,15 +62,23 @@ export async function getCollections(params: GetCollectionsParams) {
   }
 }
 
-export async function getCollectionById(params: GetCollectionById) {
+export async function getCollectionById(params: { id: string }) {
   const { id } = params;
 
   try {
-    // Koleksiyonu ve ilişkili item'ları al
+    // Koleksiyonu ve ilişkili item'ları almak için 'include' kullanmak
     const collection = await prisma.collection.findUnique({
       where: { id },
       include: {
-        items: true,
+        items: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+            link: true,
+            createdAt: true,
+          },
+        },
       },
     });
 
@@ -82,8 +90,6 @@ export async function getCollectionById(params: GetCollectionById) {
   } catch (error) {
     console.error("Error fetching collection:", error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
