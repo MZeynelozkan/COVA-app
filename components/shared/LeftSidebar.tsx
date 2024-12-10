@@ -32,26 +32,28 @@ const LeftSidebar = () => {
   return (
     <div className="sticky top-0 flex h-dvh w-full max-w-[320px] flex-col justify-between overflow-y-auto px-4 pb-5 pt-24 max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
       <div className="flex flex-1 flex-col gap-4 max-[1023px]:items-center">
-        <div className="flex items-center gap-3">
-          {/** Display Loader if image is not yet available */}
-          {status === "loading" || !image ? (
-            <Loader className="animate-spin" />
-          ) : (
-            <Image
-              width={40}
-              className="rounded-full"
-              height={40}
-              alt="profile image"
-              src={image || "/assets/icons/profile.png"}
-            />
-          )}
-          <div className="flex flex-col max-lg:hidden">
-            <h2 className="text-base font-[500]">{name || "Guest"}</h2>
-            <p className="text-sm leading-[21px] text-[#6B6B6B]">
-              Explore Content
-            </p>
+        <Link href="/profile">
+          <div className="flex items-center gap-3">
+            {/** Display Loader if image is not yet available */}
+            {status === "loading" || !image ? (
+              <Loader className="animate-spin" />
+            ) : (
+              <Image
+                width={40}
+                className="rounded-full"
+                height={40}
+                alt="profile image"
+                src={image || "/assets/icons/profile.png"}
+              />
+            )}
+            <div className="flex flex-col max-lg:hidden">
+              <h2 className="text-base font-[500]">{name || "Guest"}</h2>
+              <p className="text-sm leading-[21px] text-[#6B6B6B]">
+                Explore Content
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="space-y-2">
           {linksWithActiveState.map((item) =>
             item.route ? (
