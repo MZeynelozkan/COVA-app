@@ -28,3 +28,59 @@ export async function getUser() {
     throw error; // Throw error to signal failure
   }
 }
+
+export async function getUserById(userId: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        collections: true,
+        savedCollections: true,
+      },
+    });
+
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getUserCollections(params: {
+  userId: string;
+  page: number;
+  pageSize?: number;
+}) {
+  const { userId, page, pageSize = 10 } = params;
+
+  try {
+    const collections = await prisma.collection.findMany({
+      where: {
+        userId,
+      },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const totalCollections = await prisma.collection.count({
+      where: {
+        userId,
+      },
+    });
+
+    return {
+      collections,
+      totalPages: Math.ceil(totalCollections / pageSize),
+      currentPage: page,
+      totalCollections,
+    };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

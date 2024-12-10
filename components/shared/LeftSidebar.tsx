@@ -14,7 +14,7 @@ import { sidebarLinks } from "@/constants/constants";
 import { Button } from "../ui/button";
 
 const LeftSidebar = () => {
-  const { data: session, status } = useSession(); // Access status for loading state
+  const { data: session, status } = useSession();
 
   const { image, name } = session?.user || {};
 
@@ -32,7 +32,7 @@ const LeftSidebar = () => {
   return (
     <div className="sticky top-0 flex h-dvh w-full max-w-[320px] flex-col justify-between overflow-y-auto px-4 pb-5 pt-24 max-lg:w-[60px] max-lg:px-2 max-sm:hidden">
       <div className="flex flex-1 flex-col gap-4 max-[1023px]:items-center">
-        <Link href="/profile">
+        <Link href={`/profile/${session?.user?.id}`}>
           <div className="flex items-center gap-3">
             {/** Display Loader if image is not yet available */}
             {status === "loading" || !image ? (

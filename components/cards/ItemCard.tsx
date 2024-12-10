@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 
 interface Props {
-  user: User;
+  user?: User;
   createdAt: Date;
   type: string;
   coverImg: string;
@@ -35,7 +35,7 @@ const ItemCard = ({ user, createdAt, id, type, coverImg, saved }: Props) => {
           {/* Üst Bilgiler */}
           <div className="flex items-center justify-between">
             <p className="text-base leading-[24px] text-gray-800 dark:text-gray-200">
-              {user.name}
+              {user?.name}
             </p>
             <h2 className="font-bold text-gray-800 dark:text-gray-100">
               Type: {type}
