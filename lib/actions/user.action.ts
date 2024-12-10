@@ -84,3 +84,24 @@ export async function getUserCollections(params: {
     throw error;
   }
 }
+
+export async function getTopArtists() {
+  try {
+    const topArtists = await prisma.user.findMany({
+      orderBy: {
+        collections: {
+          _count: "desc", // Koleksiyonları savedCount'a göre topluyoruz
+        },
+      },
+      take: 4,
+      include: {
+        collections: true,
+      },
+    });
+
+    return topArtists;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

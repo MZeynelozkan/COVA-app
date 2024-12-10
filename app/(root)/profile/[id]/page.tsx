@@ -85,7 +85,10 @@ const Page = async ({ params, searchParams }: URLProps) => {
         </TabsList>
         {/* Tab Content */}
         <TabsContent value="about"></TabsContent>
-        <TabsContent value="collections">
+        <TabsContent
+          className="grid grid-cols-2 gap-4 max-md:grid-cols-1"
+          value="collections"
+        >
           <CollectionTab userId={user?.id!} searchParams={searchParams} />
         </TabsContent>
       </Tabs>
