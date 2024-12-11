@@ -14,7 +14,6 @@ const Page = async ({ params }: ParamsProps) => {
   const user = await getUser();
 
   const collection = await getCollectionById({ id });
-  console.log("user", user);
 
   return (
     <div className="flex size-full min-h-screen flex-col bg-white p-6 dark:bg-gray-900">

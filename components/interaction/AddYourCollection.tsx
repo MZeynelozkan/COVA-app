@@ -28,6 +28,7 @@ const AddYourCollection = ({
   item,
   collectionId,
 }: Props) => {
+  console.log(collectionId, item.id, userId);
   const handleAddToCollection = async (collectionId: string) => {
     try {
       // Server action'ı çağırıyoruz
@@ -44,7 +45,6 @@ const AddYourCollection = ({
   const handleDelete = async (collectionId: string) => {
     try {
       removeItemYourCollection({ collectionId, userId, itemId: item.id });
-      console.log(collectionId, item.id);
     } catch (error) {
       console.error(error);
     }
