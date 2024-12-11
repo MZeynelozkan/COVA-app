@@ -33,3 +33,7 @@ export interface SaveCollectionParams {
   collectionId: string;
   userId: string;
 }
+
+export interface SearchParams {
+  query?: string | null;
+}
