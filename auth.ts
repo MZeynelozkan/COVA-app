@@ -25,4 +25,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
   },
   ...authConfig,
+  trustHost: true,
+  pages: {
+    signIn: "/sign-in", // Yalnızca sign-in sayfası özelleştiriliyorsa, burada belirtin
+  },
 });
