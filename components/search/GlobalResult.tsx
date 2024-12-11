@@ -30,6 +30,7 @@ const GlobalResult = () => {
       try {
         const res = await globalSearch({ query: global });
         const parsedResult = JSON.parse(res);
+        console.log(parsedResult);
 
         const validatedResult = parsedResult.filter(
           (item: any) => item?.id && item?.type && item?.name

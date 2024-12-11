@@ -21,34 +21,36 @@ export async function globalSearch(params: SearchParams) {
       },
     ];
 
-    // Paralel sorgular oluşturmak için Promise.all kullanımı
-    const results = await Promise.all(
-      modelsAndTypes.map(async ({ model, type, searchField }) => {
-        const items = await model.findMany({
-          where: {
-            [searchField]: {
-              contains: query,
-              mode: "insensitive",
-            },
-          },
-          select: {
-            id: true,
-            name: true,
-          },
-          take: 5,
-        });
+    const results = [];
 
-        // Modelin sonuçlarını uygun formatta döndür
-        return items.map((item) => ({
+    // for...of döngüsü ile sıralı sorgular çalıştırma
+    for (const { model, type, searchField } of modelsAndTypes) {
+      const items = await model.findMany({
+        where: {
+          [searchField]: {
+            contains: query,
+            mode: "insensitive",
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+        take: 5,
+      });
+
+      // Sonuçları uygun formatta ekle
+      results.push(
+        ...items.map((item) => ({
           type,
           id: item.id,
           name: item.name,
-        }));
-      })
-    );
+        }))
+      );
+    }
 
-    // Tüm sonuçları düz bir diziye dönüştür
-    return JSON.stringify(results.flat());
+    // Tüm sonuçları JSON olarak döndür
+    return JSON.stringify(results);
   } catch (err) {
     console.error(err);
     throw new Error("Global search failed");
