@@ -1,18 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- 
+
 generator client {
   provider = "prisma-client-js"
 }
- 
+
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -21,13 +15,14 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+  collections   Collection[] // Kullanıcının oluşturduğu koleksiyonlar
+  savedCollections Collection[] @relation("SavedCollections") // Kaydedilen koleksiyonlar
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model Account {
   userId            String
   type              String
@@ -40,33 +35,33 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([provider, providerAccountId])
 }
- 
+
 model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@id([identifier, token])
 }
- 
+
 // Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
@@ -77,8 +72,43 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([userId, credentialID])
+}
+
+// Collection model
+model Collection {
+  id             String          @id @default(cuid())
+  name           String
+  createdAt      DateTime        @default(now())
+  type           CollectionType
+  savedCount     Int             @default(0)
+  specification  String?
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  savedByUsers   User[]          @relation("SavedCollections")
+  items          Item[]          @relation("CollectionItems") // Prisma otomatik ara tablo oluşturur
+  coverImg       String?
+
+  @@unique([name, userId])
+}
+
+model Item {
+  id           String       @id @default(cuid())
+  name         String
+  image        String
+  link         String
+  collections  Collection[] @relation("CollectionItems") // Prisma otomatik ara tablo oluşturur
+
+  createdAt    DateTime     @default(now())
+}
+
+
+// Enum for collection types
+enum CollectionType {
+  ART
+  PRODUCT
+  MUSIC
 }

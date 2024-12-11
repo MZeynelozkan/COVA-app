@@ -53,27 +53,29 @@ const MobileNavbar = () => {
           className="overflow-y-auto bg-white dark:bg-gray-900"
         >
           {/* Profil Bölümü */}
-          <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
-            {status === "loading" || !image ? (
-              <Loader className="animate-spin" />
-            ) : (
-              <Image
-                width={40}
-                height={40}
-                alt="profile image"
-                src={image || "/assets/icons/profile.png"} // Fallback image
-                className="rounded-full"
-              />
-            )}
-            <div className="flex flex-col">
-              <h2 className="text-base font-[500] text-black dark:text-white">
-                {status === "loading" ? "Loading..." : name || "Guest"}
-              </h2>
-              <p className="text-sm leading-[21px] text-gray-500 dark:text-gray-400">
-                Explore Content
-              </p>
+          <Link href={`/profile/${session?.user?.id}`}>
+            <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
+              {status === "loading" || !image ? (
+                <Loader className="animate-spin" />
+              ) : (
+                <Image
+                  width={40}
+                  height={40}
+                  alt="profile image"
+                  src={image || "/assets/icons/profile.png"} // Fallback image
+                  className="rounded-full"
+                />
+              )}
+              <div className="flex flex-col">
+                <h2 className="text-base font-[500] text-black dark:text-white">
+                  {status === "loading" ? "Loading..." : name || "Guest"}
+                </h2>
+                <p className="text-sm leading-[21px] text-gray-500 dark:text-gray-400">
+                  Explore Content
+                </p>
+              </div>
             </div>
-          </div>
+          </Link>
 
           {/* Linkler */}
           <div className="flex flex-col gap-4 p-4">
@@ -121,12 +123,19 @@ const MobileNavbar = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={() => signOut()}
-                className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED]"
-              >
-                Sign Out
-              </Button>
+              <>
+                <Link href="/create">
+                  <Button className="mb-5 w-full rounded-[24px] bg-blue-400 px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED] ">
+                    Create Collection
+                  </Button>
+                </Link>
+                <Button
+                  onClick={() => signOut()}
+                  className="mb-5 rounded-[24px] bg-[#EDEDED] px-5 py-0 text-[16px] font-bold text-black hover:bg-[#EDEDED]"
+                >
+                  Sign Out
+                </Button>
+              </>
             )}
           </div>
         </SheetContent>
