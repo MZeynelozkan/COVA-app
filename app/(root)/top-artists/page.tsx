@@ -6,8 +6,6 @@ import { getTopArtists } from "@/lib/actions/user.action";
 const page = async () => {
   const topArtists = await getTopArtists();
 
-  console.log(topArtists);
-
   return (
     <div className="flex size-full flex-col items-start gap-4 p-4">
       <div className="space-y-3">
