@@ -29,6 +29,7 @@ const AddYourCollection = ({
   collectionId,
 }: Props) => {
   console.log(collectionId, item.id, userId);
+  const targetCollection = userCollections.find((c) => c.id === collectionId);
   const handleAddToCollection = async (collectionId: string) => {
     try {
       // Server action'ı çağırıyoruz
@@ -67,8 +68,7 @@ const AddYourCollection = ({
             </DropdownMenuItem>
           ))}
 
-          {userId ===
-            userCollections.find((c) => c.id === collectionId)?.userId && (
+          {targetCollection && targetCollection.userId === userId && (
             <DropdownMenuItem
               onClick={() => handleDelete(collectionId)}
               className="cursor-pointer hover:bg-gray-100"
