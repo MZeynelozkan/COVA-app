@@ -1,10 +1,14 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 import MobileNavbar from "./MobileNavbar";
-import GlobalSearch from "../search/GlobalSearch";
 import { ModeToggle } from "../theme/ModeToggle";
+
+const GlobalSearch = dynamic(() => import("../search/GlobalSearch"), {
+  ssr: false, // SSR sırasında bu bileşeni yükleme
+});
 
 const Navbar = () => {
   return (
