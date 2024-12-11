@@ -28,7 +28,6 @@ const AddYourCollection = ({
   item,
   collectionId,
 }: Props) => {
-  console.log(collectionId, item.id, userId);
   const targetCollection = userCollections.find((c) => c.id === collectionId);
   const handleAddToCollection = async (collectionId: string) => {
     try {
