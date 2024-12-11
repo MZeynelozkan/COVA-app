@@ -18,6 +18,8 @@ const LeftSidebar = () => {
 
   const { image, name } = session?.user || {};
 
+  console.log(session);
+
   const pathname = usePathname();
 
   // active state

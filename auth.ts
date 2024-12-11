@@ -1,25 +1,28 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-import GitHub from "next-auth/providers/github";
 
-import prisma from "./prisma";
+import authConfig from "./auth.config";
+import { prisma } from "./prisma";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  providers: [GitHub],
-
+  session: { strategy: "jwt" },
   callbacks: {
-    async session({ session, user }) {
-      if (user?.id) {
-        session.user.id = user.id;
+    async session({ session, token }) {
+      // JWT'den kullanıcı kimliğini oturum nesnesine ekleyin
+      if (token?.id) {
+        session.user.id = token.id as string;
       }
       return session;
     },
     async jwt({ token, user }) {
+      // Oturum açıldığında kullanıcı kimliğini token'a ekleyin
       if (user?.id) {
         token.id = user.id;
       }
+      // Daha önceki oturumlar için kimlik atanmışsa, token üzerinde tutmaya devam edin
       return token;
     },
   },
+  ...authConfig,
 });

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import prisma from "@/prisma";
+import { prisma } from "@/prisma";
 
 import { CreateItemParams, GetItemsByCollectionIdParams } from "./shared.types";
 
