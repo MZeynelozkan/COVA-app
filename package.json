@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npx prisma generate --no-engine && next dev",
     "build": "npx prisma generate --no-engine && next build",
-    "start": "next start",
+    "start": "npx prisma generate --no-engine && next start",
     "lint": "next lint"
   },
   "dependencies": {
