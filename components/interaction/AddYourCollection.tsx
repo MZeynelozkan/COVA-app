@@ -43,7 +43,6 @@ const AddYourCollection = ({
 
   const handleDelete = async (collectionId: string) => {
     try {
-      // Server action'ı çağırıyoruz
       removeItemYourCollection({ collectionId, userId, itemId: item.id });
       console.log(collectionId, item.id);
     } catch (error) {
@@ -67,12 +66,16 @@ const AddYourCollection = ({
               {collection.name}
             </DropdownMenuItem>
           ))}
-          <DropdownMenuItem
-            onClick={() => handleDelete(collectionId)}
-            className="cursor-pointer hover:bg-gray-100"
-          >
-            Delete
-          </DropdownMenuItem>
+
+          {userId ===
+            userCollections.find((c) => c.id === collectionId)?.userId && (
+            <DropdownMenuItem
+              onClick={() => handleDelete(collectionId)}
+              className="cursor-pointer hover:bg-gray-100"
+            >
+              Delete
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
