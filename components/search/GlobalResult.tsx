@@ -32,11 +32,7 @@ const GlobalResult = () => {
         const parsedResult = JSON.parse(res);
         console.log(parsedResult);
 
-        const validatedResult = parsedResult.filter(
-          (item: any) => item?.id && item?.type && item?.name
-        );
-
-        setResult(validatedResult);
+        setResult(parsedResult);
       } catch (error) {
         console.error(error);
       } finally {
