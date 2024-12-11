@@ -67,6 +67,7 @@ const Page = async ({ params }: ParamsProps) => {
                   userCollections={user?.collections || []}
                   userId={user?.id!}
                   item={item}
+                  collectionId={id}
                 />
               </div>
               <Link href={item.link} target="_blank" passHref>

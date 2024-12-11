@@ -10,15 +10,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { addItemYourCollection } from "@/lib/actions/user.action";
+import {
+  addItemYourCollection,
+  removeItemYourCollection,
+} from "@/lib/actions/item.action";
 
 interface Props {
   userCollections: Collection[];
   userId: string;
   item: Item;
+  collectionId: string;
 }
 
-const AddYourCollection = ({ userCollections, userId, item }: Props) => {
+const AddYourCollection = ({
+  userCollections,
+  userId,
+  item,
+  collectionId,
+}: Props) => {
   const handleAddToCollection = async (collectionId: string) => {
     try {
       // Server action'ı çağırıyoruz
@@ -27,6 +36,16 @@ const AddYourCollection = ({ userCollections, userId, item }: Props) => {
         userId,
         itemId: item.id,
       });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (collectionId: string) => {
+    try {
+      // Server action'ı çağırıyoruz
+      removeItemYourCollection({ collectionId, userId, itemId: item.id });
+      console.log(collectionId, item.id);
     } catch (error) {
       console.error(error);
     }
@@ -48,6 +67,12 @@ const AddYourCollection = ({ userCollections, userId, item }: Props) => {
               {collection.name}
             </DropdownMenuItem>
           ))}
+          <DropdownMenuItem
+            onClick={() => handleDelete(collectionId)}
+            className="cursor-pointer hover:bg-gray-100"
+          >
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
