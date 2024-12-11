@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 import { useDebounce } from "@/hooks/useDebounce";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
@@ -68,12 +68,7 @@ const GlobalSearch = () => {
       ref={searchContainerRef}
       className="relative flex h-[40px] w-full max-w-[160px] items-center gap-2 rounded-[12px] bg-[#EDEDED] px-4 py-2"
     >
-      <Image
-        alt="search"
-        width={24}
-        height={24}
-        src="assets/icons/search.svg"
-      />
+      <FaSearch size={24} />
       <Input
         className="rounded-none border-none bg-transparent pl-0 text-[16px] text-[#6B6B6B] focus-visible:ring-0 focus-visible:ring-offset-0"
         placeholder="Search"
