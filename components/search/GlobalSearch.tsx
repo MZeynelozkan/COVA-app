@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, Suspense } from "react";
 
 import { useDebounce } from "@/hooks/useDebounce";
 import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
@@ -17,11 +17,17 @@ const GlobalSearch = () => {
   const searchContainerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const query = searchParams.get("q");
+  const [query, setQuery] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
 
-  const [search, setSearch] = useState(query || "");
-
+  // Debounce search input
   const debouncedSearch = useDebounce(search, 300);
+
+  useEffect(() => {
+    // Update query state based on URL searchParams
+    setQuery(searchParams.get("q"));
+    setSearch(searchParams.get("q") || "");
+  }, [searchParams]);
 
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
@@ -84,7 +90,11 @@ const GlobalSearch = () => {
           if (e.target.value === "" && isOpen) setIsOpen(false);
         }}
       />
-      {isOpen && <GlobalResult />}
+      {isOpen && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <GlobalResult />
+        </Suspense>
+      )}
     </div>
   );
 };
