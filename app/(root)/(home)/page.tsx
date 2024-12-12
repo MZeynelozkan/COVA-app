@@ -6,8 +6,6 @@ import { getCollections } from "@/lib/actions/collection.action";
 const Home = async () => {
   const collections = await getCollections({
     pageSize: 3,
-
-    type: "ART",
   });
 
   return (

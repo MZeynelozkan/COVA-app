@@ -11,7 +11,7 @@ export interface CreateCollectionParams {
 export interface GetCollectionsParams {
   page?: number;
   pageSize: number;
-  type: Prisma.CollectionType;
+  type?: Prisma.CollectionType;
 }
 
 export interface GetCollectionById {
