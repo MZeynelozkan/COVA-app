@@ -1,5 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CldUploadButton, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 import React, { useEffect, useState } from "react";
@@ -21,6 +22,7 @@ interface Props {
 const AddItemForm = ({ collectionId }: Props) => {
   const [coverImg, setCoverImg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formSubmitting, setFormSubmitting] = useState(false); // Form yükleme durumu
   const router = useRouter();
 
   const parsedCollectionId = JSON.parse(collectionId);
@@ -42,17 +44,27 @@ const AddItemForm = ({ collectionId }: Props) => {
     const { name, link, image } = values;
 
     try {
+      setFormSubmitting(true);
       await createItem({ collectionId: parsedCollectionId, name, image, link });
       setTimeout(() => {
         router.push(`/collection/${parsedCollectionId}`);
       }, 2000); // 2 saniye gecikme
     } catch (error) {
       console.log(error);
+    } finally {
+      setFormSubmitting(false);
     }
   }
 
   return (
-    <div className="mx-auto max-w-xl p-6">
+    <div className="relative mx-auto max-w-xl p-6">
+      {/* Loading Overlay */}
+      {formSubmitting && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50">
+          <Loader className="animate-spin text-white" />
+        </div>
+      )}
+
       {/* Title Section */}
       <h1 className="mb-6 text-center text-3xl font-bold text-black dark:text-white">
         Add Item

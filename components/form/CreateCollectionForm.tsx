@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CldUploadButton, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 import { useEffect, useState } from "react";
@@ -35,7 +36,7 @@ interface Props {
 
 const CreateCollectionForm = ({ userId, type, path }: Props) => {
   const [coverImg, setCoverImg] = useState("");
-  const [loading, setLoading] = useState(false); // To handle loading state for image upload
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const parsedUserId = JSON.parse(userId);
@@ -54,6 +55,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
   }, [coverImg, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true); // Loading başlasın
     const { type, name, specification, coverImg } = values;
 
     try {
@@ -66,15 +68,24 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
       });
 
       setTimeout(() => {
+        setLoading(false); // Loading bitsin
         router.push("/");
-      }, 2000); // 2-second delay
+      }, 2000); // 2 saniye delay
     } catch (error) {
       console.log(error);
+      setLoading(false); // Hata durumunda da loading'i kapat
     }
   }
 
   return (
-    <div className="mx-auto max-w-xl p-6">
+    <div className="relative mx-auto max-w-xl p-6">
+      {/* Overlay ve Loader */}
+      {loading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50">
+          <Loader className="animate-spin text-white" />
+        </div>
+      )}
+
       {/* Title Section */}
       <h1 className="mb-6 text-center text-3xl font-bold text-black dark:text-white">
         Create Collection
@@ -191,8 +202,11 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
           />
 
           {/* Submit Button */}
-          <Button className="w-full rounded-md bg-black py-3 font-bold text-white transition hover:bg-gray-800 dark:hover:bg-gray-700">
-            Submit
+          <Button
+            disabled={loading}
+            className="w-full rounded-md bg-black py-3 font-bold text-white transition hover:bg-gray-800 dark:hover:bg-gray-700"
+          >
+            {loading ? "Submitting..." : "Submit"}
           </Button>
         </form>
       </Form>
