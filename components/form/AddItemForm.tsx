@@ -43,7 +43,9 @@ const AddItemForm = ({ collectionId }: Props) => {
 
     try {
       await createItem({ collectionId: parsedCollectionId, name, image, link });
-      router.push(`/collection/${parsedCollectionId}`);
+      setTimeout(() => {
+        router.push(`/collection/${parsedCollectionId}`);
+      }, 2000); // 2 saniye gecikme
     } catch (error) {
       console.log(error);
     }
