@@ -23,7 +23,7 @@ export async function createItem(params: CreateItemParams) {
     });
 
     // 2. Sayfayı yeniden doğrula
-    revalidatePath(`/collection/${collectionId}`, "layout");
+    revalidatePath(`/collection/${collectionId}`);
 
     return newItem;
   } catch (error) {

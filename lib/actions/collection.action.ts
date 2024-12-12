@@ -26,7 +26,7 @@ export async function createCollection(params: CreateCollectionParams) {
       },
     });
 
-    revalidatePath("/", "layout");
+    revalidatePath("/");
 
     return newCollection;
   } catch (error) {
