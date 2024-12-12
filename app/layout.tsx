@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 // eslint-disable-next-line camelcase, import/order
 import { Plus_Jakarta_Sans } from "next/font/google";
 
-// eslint-disable-next-line import/order
-import Head from "next/head"; // next/head bileşenini içe aktarın
-
 import "./globals.css";
 import "@/styles/theme.css";
 import { SessionProvider } from "next-auth/react";
 
+import AdSense from "@/components/adsense/AdSense";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -29,14 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        {/* Google AdSense Script */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4289366483169589"
-          crossOrigin="anonymous"
-        ></script>
-      </Head>
+      <head>
+        <AdSense pId="pub-4289366483169589" />
+      </head>
       <body className={plusJakartaSans.className}>
         <ThemeProvider
           attribute="class"
