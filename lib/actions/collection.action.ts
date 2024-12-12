@@ -26,7 +26,13 @@ export async function createCollection(params: CreateCollectionParams) {
       },
     });
 
-    revalidatePath("/");
+    if (!newCollection) {
+      return null;
+    }
+
+    if (newCollection) {
+      revalidatePath("/");
+    }
 
     return newCollection;
   } catch (error) {
