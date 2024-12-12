@@ -9,11 +9,15 @@ import { getCollectionById } from "@/lib/actions/collection.action";
 import { getUser } from "@/lib/actions/user.action";
 import { ParamsProps } from "@/types/types";
 
+import Error from "./error";
+
 const Page = async ({ params }: ParamsProps) => {
   const { id } = params;
   const user = await getUser();
 
   const collection = await getCollectionById({ id });
+
+  if (!collection) <Error />;
 
   return (
     <div className="flex size-full min-h-screen flex-col bg-white p-6 dark:bg-gray-900">
