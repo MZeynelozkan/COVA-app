@@ -26,6 +26,8 @@ export async function createCollection(params: CreateCollectionParams) {
       },
     });
 
+    console.log("revalidation start");
+
     revalidatePath("/");
 
     return newCollection;
