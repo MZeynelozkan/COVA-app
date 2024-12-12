@@ -57,7 +57,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
     const { type, name, specification, coverImg } = values;
 
     try {
-      const newCollection = await createCollection({
+      await createCollection({
         coverImg,
         type,
         userId: parsedUserId,
@@ -65,9 +65,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
         name,
       });
 
-      if (newCollection) {
-        router.push("/");
-      }
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
