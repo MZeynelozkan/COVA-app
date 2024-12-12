@@ -53,7 +53,11 @@ const MobileNavbar = () => {
           className="overflow-y-auto bg-white dark:bg-gray-900"
         >
           {/* Profil Bölümü */}
-          <Link href={`/profile/${session?.user?.id}`}>
+          <Link
+            href={`${
+              status === "loading" ? "/" : `/profile/${session?.user?.id}`
+            }`}
+          >
             <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
               {status === "loading" || !image ? (
                 <Loader className="animate-spin" />
