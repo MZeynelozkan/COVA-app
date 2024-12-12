@@ -65,7 +65,9 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
         name,
       });
 
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000); // 2-second delay
     } catch (error) {
       console.log(error);
     }
