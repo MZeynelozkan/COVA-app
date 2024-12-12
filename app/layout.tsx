@@ -4,9 +4,9 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 
 import "./globals.css";
 import "@/styles/theme.css";
+import Script from "next/script";
 import { SessionProvider } from "next-auth/react";
 
-import AdSense from "@/components/adsense/AdSense";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -27,7 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AdSense />
+      <Script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID}`}
+        crossOrigin="anonymous"
+      />
 
       <body className={plusJakartaSans.className}>
         <ThemeProvider
