@@ -36,7 +36,7 @@ const LeftSidebar = () => {
       <div className="flex flex-1 flex-col gap-4 max-[1023px]:items-center">
         <Link
           href={`${
-            status === "loading" ? "/" : `/profile/${session?.user?.id}`
+            status === "loading" ? "" : `/profile/${session?.user?.id}`
           }`}
         >
           <div className="flex items-center gap-3">

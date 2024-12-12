@@ -55,7 +55,7 @@ const MobileNavbar = () => {
           {/* Profil Bölümü */}
           <Link
             href={`${
-              status === "loading" ? "/" : `/profile/${session?.user?.id}`
+              status === "loading" ? "" : `/profile/${session?.user?.id}`
             }`}
           >
             <div className="flex items-center gap-3 border-b border-gray-200 p-4 dark:border-gray-700">
