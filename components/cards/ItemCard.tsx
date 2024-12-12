@@ -20,7 +20,7 @@ const ItemCard = ({ user, createdAt, id, type, coverImg, saved }: Props) => {
 
   return (
     <Link className="size-full" href={`/collection/${id}`}>
-      <Card className="flex size-full max-w-[499px] flex-col gap-3 border-none pb-3 shadow-none">
+      <Card className="flex size-11/12 max-w-[499px] flex-col gap-3 border-none pb-3 shadow-none">
         <CardHeader className="relative h-0 w-full pb-[140%]">
           {/* Görsel Bölümü */}
           <Image

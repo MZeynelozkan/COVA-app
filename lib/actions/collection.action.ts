@@ -55,7 +55,10 @@ export async function getCollections(params: GetCollectionsParams) {
       ],
     });
 
-    return collections;
+    const totalCollections = await prisma.collection.count();
+    const isNext = page * pageSize < totalCollections;
+
+    return { collections, isNext };
   } catch (error) {
     console.log(error);
     throw error;
