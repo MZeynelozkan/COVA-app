@@ -81,7 +81,7 @@ const CreateCollectionForm = ({ userId, type, path }: Props) => {
     <div className="relative mx-auto max-w-xl p-6">
       {/* Overlay ve Loader */}
       {loading && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="absolute inset-0 z-50 flex size-full items-center justify-center bg-black/50">
           <Loader className="animate-spin text-white" />
         </div>
       )}
