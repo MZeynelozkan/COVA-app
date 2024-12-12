@@ -27,9 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <AdSense />
-      </head>
+      <AdSense />
+
       <body className={plusJakartaSans.className}>
         <ThemeProvider
           attribute="class"
