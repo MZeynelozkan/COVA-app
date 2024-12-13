@@ -5,7 +5,7 @@ import SignInGoogle from "@/components/auth/SignInGoogle";
 
 const Page = () => {
   return (
-    <div className="flex h-screen w-full items-center justify-center gap-5">
+    <div className="flex h-screen w-full flex-col items-center justify-center gap-5">
       <SignIn />
       <SignInGoogle />
     </div>
