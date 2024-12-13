@@ -115,3 +115,14 @@ export async function getTopArtists() {
     throw error;
   }
 }
+
+export async function getALlUsers() {
+  try {
+    const users = await prisma.user.findMany({});
+
+    return users;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
