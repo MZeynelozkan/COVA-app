@@ -12,7 +12,7 @@ const Page = async () => {
   const users = await getALlUsers();
 
   return (
-    <div className="flex size-full flex-wrap p-4">
+    <div className="flex size-full flex-wrap gap-10 p-4">
       {users.map((user) => (
         <Link href={`/profile/${user.id}`} key={user.id}>
           {user.name}
