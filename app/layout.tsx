@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 // eslint-disable-next-line camelcase, import/order
 import { Plus_Jakarta_Sans } from "next/font/google";
@@ -41,7 +42,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            {children}
+            <SpeedInsights />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
