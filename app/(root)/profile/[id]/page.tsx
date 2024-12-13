@@ -11,8 +11,6 @@ import { URLProps } from "@/types/types";
 const Page = async ({ params, searchParams }: URLProps) => {
   const session = await auth();
 
-  console.log(session?.user.role);
-
   const { id } = params;
 
   const user = await getUserById(id);
