@@ -40,6 +40,9 @@ export async function getCollections(params: GetCollectionsParams) {
 
   try {
     const collections = await prisma.collection.findMany({
+      where: {
+        publicVisibility: true,
+      },
       include: {
         user: true,
       },

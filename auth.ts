@@ -13,12 +13,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (token?.id) {
         session.user.id = token.id as string;
       }
+      if (token?.role) {
+        session.user.role = token.role as string;
+      }
       return session;
     },
     async jwt({ token, user }) {
       // Oturum açıldığında kullanıcı kimliğini token'a ekleyin
       if (user?.id) {
         token.id = user.id;
+      }
+      if (user?.role) {
+        token.role = user.role;
       }
       // Daha önceki oturumlar için kimlik atanmışsa, token üzerinde tutmaya devam edin
       return token;

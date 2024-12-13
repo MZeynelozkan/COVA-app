@@ -52,13 +52,22 @@ export async function getUserCollections(params: {
   userId: string;
   page: number;
   pageSize?: number;
+  viewerId?: string; // Profili görüntüleyen kullanıcının kimliği
+  viewerRole?: string; // Görüntüleyen kullanıcının rolü
 }) {
-  const { userId, page, pageSize = 10 } = params;
+  const { userId, page, pageSize = 10, viewerId, viewerRole } = params;
+
+  // Kullanıcı kendi profiline mi bakıyor? Veya admin mi?
+  const isOwner = viewerId === userId;
+  const isAdmin = viewerRole === "ADMIN"; // Admin olup olmadığına bakılır
 
   try {
     const collections = await prisma.collection.findMany({
       where: {
         userId,
+        ...(isOwner || isAdmin
+          ? {} // Kullanıcı kendi profiline veya adminse tüm koleksiyonları göster
+          : { publicVisibility: true }), // Aksi halde yalnızca public olanlar
       },
       skip: (page - 1) * pageSize,
       take: pageSize,
@@ -70,6 +79,7 @@ export async function getUserCollections(params: {
     const totalCollections = await prisma.collection.count({
       where: {
         userId,
+        ...(isOwner || isAdmin ? {} : { publicVisibility: true }),
       },
     });
 

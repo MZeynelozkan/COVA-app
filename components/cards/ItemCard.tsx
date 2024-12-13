@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 
+import AdminDropdown from "../adminComponents/AdminDropdown";
+
 interface Props {
   user?: User;
   createdAt: Date;
@@ -13,15 +15,29 @@ interface Props {
   saved: number;
   specification: string;
   id: string;
+  viewerUser?: string;
 }
 
-const ItemCard = ({ user, createdAt, id, type, coverImg, saved }: Props) => {
+const ItemCard = ({
+  user,
+  createdAt,
+  id,
+  type,
+  coverImg,
+  saved,
+  viewerUser,
+}: Props) => {
   const formattedDate = createdAt ? formatDate(createdAt) : "Unknown date";
+
+  const parsedViewerUser = JSON.parse(viewerUser || "{}");
 
   return (
     <Link className="size-full" href={`/collection/${id}`}>
-      <Card className="flex size-11/12 max-w-[499px] flex-col gap-3 border-none pb-3 shadow-none">
+      <Card className="relative flex size-11/12 max-w-[499px] flex-col gap-3 border-none pb-3 shadow-none">
         <CardHeader className="relative h-0 w-full pb-[140%]">
+          {parsedViewerUser?.role === "ADMIN" && (
+            <AdminDropdown collectionId={id} userRole={parsedViewerUser.role} />
+          )}
           {/* Görsel Bölümü */}
           <Image
             src={coverImg ?? "/assets/icons/img1.png"}

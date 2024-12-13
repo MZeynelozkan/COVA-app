@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
+import { auth } from "@/auth";
 import CollectionTab from "@/components/shared/CollectionTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/lib/actions/user.action";
@@ -8,6 +9,10 @@ import { formatDate } from "@/lib/utils";
 import { URLProps } from "@/types/types";
 
 const Page = async ({ params, searchParams }: URLProps) => {
+  const session = await auth();
+
+  console.log(session?.user.role);
+
   const { id } = params;
 
   const user = await getUserById(id);
@@ -89,7 +94,13 @@ const Page = async ({ params, searchParams }: URLProps) => {
           className="grid grid-cols-2 gap-4 max-md:grid-cols-1"
           value="collections"
         >
-          <CollectionTab userId={user?.id!} searchParams={searchParams} />
+          <CollectionTab
+            userId={user?.id!}
+            searchParams={searchParams}
+            viewerId={session?.user?.id}
+            viewerRole={session?.user?.role}
+            viewerUser={JSON.stringify(session?.user)}
+          />
         </TabsContent>
       </Tabs>
     </div>

@@ -7,13 +7,25 @@ import ItemCard from "../cards/ItemCard";
 
 interface Props extends SearchParamsProps {
   userId: string;
+  viewerId?: string;
+  viewerRole?: string;
+  viewerUser?: string;
 }
 
-const CollectionTab = async ({ searchParams, userId }: Props) => {
+const CollectionTab = async ({
+  searchParams,
+  userId,
+  viewerId,
+  viewerRole,
+  viewerUser,
+}: Props) => {
   const { collections } = await getUserCollections({
     userId,
     page: searchParams.page ? +searchParams.page : 1,
+    viewerId,
+    viewerRole,
   });
+
   return (
     <>
       {collections?.map((item, index) => (
@@ -25,6 +37,7 @@ const CollectionTab = async ({ searchParams, userId }: Props) => {
           type={item.type}
           specification={item.specification!}
           id={item.id}
+          viewerUser={viewerUser}
         />
       ))}
     </>
