@@ -26,8 +26,42 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user?.role) {
         token.role = user.role;
       }
-      // Daha önceki oturumlar için kimlik atanmışsa, token üzerinde tutmaya devam edin
       return token;
+    },
+    async signIn({ user, account, profile }) {
+      if (!account) {
+        return false; // Eğer account null ise giriş başarısız olur
+      }
+
+      const existingUser = await prisma.user.findUnique({
+        where: { email: user.email! },
+      });
+
+      if (existingUser) {
+        const existingAccount = await prisma.account.findFirst({
+          where: {
+            userId: existingUser.id,
+            provider: account.provider,
+          },
+        });
+
+        if (!existingAccount) {
+          // OAuth sağlayıcısı mevcut değilse bağla
+          await prisma.account.create({
+            data: {
+              userId: existingUser.id,
+              type: account.type,
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+              access_token: account.access_token,
+              refresh_token: account.refresh_token,
+              expires_at: account.expires_at,
+            },
+          });
+        }
+        return true;
+      }
+      return true; // Yeni bir kullanıcıysa girişe izin ver
     },
   },
   ...authConfig,
