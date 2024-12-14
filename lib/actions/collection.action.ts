@@ -167,7 +167,7 @@ export async function unsaveCollections(params: SaveCollectionParams) {
   }
 }
 
-export async function getTopProductCollections(params: any) {
+export async function getTopCollections(params: any) {
   const { type, path } = params;
 
   try {

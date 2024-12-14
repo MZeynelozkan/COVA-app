@@ -1,10 +1,10 @@
 import React from "react";
 
 import ProductCollectionCards from "@/components/cards/ProductCollectionCars";
-import { getTopProductCollections } from "@/lib/actions/collection.action";
+import { getTopCollections } from "@/lib/actions/collection.action";
 
 const Page = async () => {
-  const products = await getTopProductCollections({
+  const products = await getTopCollections({
     type: "PRODUCT",
     path: "/popular-products",
   });

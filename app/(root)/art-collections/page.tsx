@@ -1,8 +1,13 @@
 import React from "react";
 
 import ArtCollectionCard from "@/components/cards/ArtCollectionCard";
+import { getTopCollections } from "@/lib/actions/collection.action";
 
-const page = () => {
+const page = async () => {
+  const arts = await getTopCollections({
+    type: "ART",
+    path: "/art-collections",
+  });
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="space-y-3">
@@ -13,8 +18,15 @@ const page = () => {
           Explore the arts collections
         </p>
       </div>
-      {Array.from({ length: 2 }).map((item, index) => (
-        <ArtCollectionCard key={index} />
+      {arts.map((item, index) => (
+        <ArtCollectionCard
+          title={item.name}
+          savingCount={item.savedCount}
+          artCount={item.items.length}
+          id={item.id}
+          specification={item.specification!}
+          key={index}
+        />
       ))}
     </div>
   );
