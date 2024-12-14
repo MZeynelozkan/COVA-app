@@ -4,7 +4,10 @@ import ProductCollectionCards from "@/components/cards/ProductCollectionCars";
 import { getTopProductCollections } from "@/lib/actions/collection.action";
 
 const Page = async () => {
-  const products = await getTopProductCollections({ type: "PRODUCT" });
+  const products = await getTopProductCollections({
+    type: "PRODUCT",
+    path: "/popular-products",
+  });
 
   console.log(products);
 

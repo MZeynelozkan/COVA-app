@@ -168,7 +168,7 @@ export async function unsaveCollections(params: SaveCollectionParams) {
 }
 
 export async function getTopProductCollections(params: any) {
-  const { type } = params;
+  const { type, path } = params;
 
   try {
     const topCollections = await prisma.collection.findMany({
@@ -184,6 +184,8 @@ export async function getTopProductCollections(params: any) {
       },
       take: 4,
     });
+
+    revalidatePath(path);
     return topCollections;
   } catch (error) {
     console.error(error);
