@@ -1,8 +1,13 @@
 import React from "react";
 
 import ProductCollectionCards from "@/components/cards/ProductCollectionCars";
+import { getTopProductCollections } from "@/lib/actions/collection.action";
 
-const Page = () => {
+const Page = async () => {
+  const products = await getTopProductCollections({ type: "PRODUCT" });
+
+  console.log(products);
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div className="space-y-3">
@@ -13,8 +18,14 @@ const Page = () => {
           Explore the product collections
         </p>
       </div>
-      {Array.from({ length: 2 }).map((item, index) => (
-        <ProductCollectionCards key={index} />
+      {products.map((item, index) => (
+        <ProductCollectionCards
+          savingCount={item.savedCount!}
+          specification={item.specification!}
+          title={item.name}
+          productCount={item.items.length}
+          key={index}
+        />
       ))}
     </div>
   );

@@ -166,3 +166,27 @@ export async function unsaveCollections(params: SaveCollectionParams) {
     throw error;
   }
 }
+
+export async function getTopProductCollections(params: any) {
+  const { type } = params;
+
+  try {
+    const topCollections = await prisma.collection.findMany({
+      where: {
+        type,
+        publicVisibility: true,
+      },
+      orderBy: {
+        savedCount: "desc",
+      },
+      include: {
+        items: true,
+      },
+      take: 4,
+    });
+    return topCollections;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

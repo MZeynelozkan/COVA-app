@@ -1,12 +1,26 @@
 import React from "react";
 
-const ProductCollectionCards = () => {
+// Props için interface tanımı
+interface ProductCollectionCardsProps {
+  title: string; // Kart başlığı
+  savingCount: number; // Kaydetme sayısı
+  productCount: number; // Ürün sayısı
+  specification: string; // Ürün özellikleri
+}
+
+// Bileşen
+const ProductCollectionCards: React.FC<ProductCollectionCardsProps> = ({
+  title,
+  savingCount,
+  productCount,
+  specification,
+}) => {
   return (
     <div className="flex w-full flex-col gap-4 border p-4">
-      <h2 className="text-xl font-bold">Title</h2>
+      <h2 className="text-xl font-bold">{title}</h2>
       <p>
-        Viewing Count:120 | Saving Count: 45 |Number of Products: 21|
-        Specification:High Quality
+        Saving Count: {savingCount} | Number of Products: {productCount} |
+        Specification: {specification}
       </p>
     </div>
   );
