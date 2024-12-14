@@ -23,6 +23,7 @@ const Page = async () => {
       </div>
       {products.map((item, index) => (
         <ProductCollectionCards
+          id={item.id}
           savingCount={item.savedCount!}
           specification={item.specification!}
           title={item.name}
