@@ -14,13 +14,8 @@ export function ModeToggle() {
     setTimeout(() => {
       setTheme(theme === "dark" ? "light" : "dark");
       setIsSwitching(false);
-    }, 200); // 200ms gecikme (isteğe bağlı olarak ayarlanabilir)
+    }, 200);
   };
 
-  return (
-    <Switch
-      onClick={handleToggle}
-      disabled={isSwitching} // Animasyon sırasında geçici olarak devre dışı bırakılır
-    />
-  );
+  return <Switch onClick={handleToggle} disabled={isSwitching} />;
 }

@@ -96,6 +96,7 @@ model Collection {
   coverImg          String?
   profileVisibility Boolean         @default(true) // Kullanıcının profilinde görünüp görünmeyeceği
   publicVisibility  Boolean         @default(false) // Genel erişime açık olup olmadığı
+  viewCount         Int             @default(0)
 
   @@unique([name, userId])
 }

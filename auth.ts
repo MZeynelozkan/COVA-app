@@ -30,7 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async signIn({ user, account, profile }) {
       if (!account) {
-        return false; // Eğer account null ise giriş başarısız olur
+        return false; 
       }
 
       const existingUser = await prisma.user.findUnique({
@@ -46,7 +46,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
 
         if (!existingAccount) {
-          // OAuth sağlayıcısı mevcut değilse bağla
           await prisma.account.create({
             data: {
               userId: existingUser.id,
@@ -61,7 +60,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
         return true;
       }
-      return true; // Yeni bir kullanıcıysa girişe izin ver
+      return true; 
     },
   },
   ...authConfig,

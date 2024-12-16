@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import { prisma } from "@/prisma";
 
 import getSession from "../getSession";
@@ -124,5 +126,31 @@ export async function getALlUsers() {
   } catch (error) {
     console.error(error);
     throw error;
+  }
+}
+
+export async function increaseViewCount(params: { collectionId: string }) {
+  const { collectionId } = params;
+
+  if (!collectionId) {
+    throw new Error("collectionId is required");
+  }
+
+  try {
+    const data = await prisma.collection.updateMany({
+      where: { id: collectionId },
+      data: {
+        viewCount: {
+          increment: 1,
+        },
+      },
+    });
+
+    revalidatePath(`/collection/${collectionId}`);
+
+    return data;
+  } catch (error) {
+    console.error("Error increasing view count:", error);
+    throw error; // Throw the error to handle it in the calling context
   }
 }
