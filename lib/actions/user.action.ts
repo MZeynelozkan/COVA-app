@@ -151,6 +151,6 @@ export async function increaseViewCount(params: { collectionId: string }) {
     return data;
   } catch (error) {
     console.error("Error increasing view count:", error);
-    throw error; // Throw the error to handle it in the calling context
+    throw error;
   }
 }
