@@ -1,6 +1,5 @@
-import Image from "next/image"; // Import Image component from Next.js
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import AddYourCollection from "@/components/interaction/AddYourCollection";
 import Save from "@/components/interaction/Save";
