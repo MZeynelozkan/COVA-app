@@ -26,7 +26,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     title: `${collection.name} - Collection Details`,
     description: `Explore the ${collection.name} collection, which includes ${collection.items.length} items.`,
-    keywords: `${collection.name}, collection, ${collection.items.map(item => item.name).join(", ")}`,
+    keywords: `${collection.name}, collection, ${collection.items
+      .map((item) => item.name)
+      .join(", ")}`,
     openGraph: {
       title: `${collection.name} - Collection Details`,
       description: `Explore the ${collection.name} collection, which includes ${collection.items.length} items.`,
