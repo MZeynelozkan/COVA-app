@@ -15,6 +15,32 @@ import { formatDate } from "@/lib/utils";
 // Types
 import { URLProps } from "@/types/types";
 
+// Dynamic Metadata
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const user = await getUserById(params.id);
+
+  return {
+    title: `${user?.name}'s Profile | MyApp`,
+    description: `${user?.name} joined on ${formatDate(
+      user?.createdAt!
+    )}. Explore their collections and saved items.`,
+    openGraph: {
+      title: `${user?.name}'s Profile`,
+      description: `View ${user?.name}'s collections and more.`,
+      images: [
+        {
+          url: user?.image
+            ? user.image
+            : "https://cdn.usegalileo.ai/sdxl10/f496ae30-5f5e-4a7c-a750-7cf9e72e4417.png",
+          width: 128,
+          height: 128,
+          alt: `${user?.name}'s profile picture`,
+        },
+      ],
+    },
+  };
+}
+
 const Page = async ({ params, searchParams }: URLProps) => {
   const session = await auth();
   const { id } = params;
