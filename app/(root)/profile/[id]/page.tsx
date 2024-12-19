@@ -4,12 +4,13 @@ import React from "react";
 
 // External modules
 import { auth } from "@/auth";
+import CollectionTab from "@/components/shared/CollectionTab";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserById } from "@/lib/actions/user.action";
+// eslint-disable-next-line import/order
 import { formatDate } from "@/lib/utils";
 
 // Components (Index & Object)
-import CollectionTab from "@/components/shared/CollectionTab";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Types
 import { URLProps } from "@/types/types";
