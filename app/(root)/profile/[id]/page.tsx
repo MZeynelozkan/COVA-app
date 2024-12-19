@@ -1,6 +1,6 @@
 // Built-in modules
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 
 // External modules
 import { auth } from "@/auth";
@@ -9,12 +9,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // Internal modules
 import { getUserById } from "@/lib/actions/user.action";
 import { formatDate } from "@/lib/utils";
+
+// Components (Index & Object)
 import CollectionTab from "@/components/shared/CollectionTab";
 
 // Types
 import { URLProps } from "@/types/types";
 
-// Komponentler (Index & Object)
 const Page = async ({ params, searchParams }: URLProps) => {
   const session = await auth();
   const { id } = params;
