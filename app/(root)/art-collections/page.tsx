@@ -4,7 +4,10 @@ import ArtCollectionCard from "@/components/cards/ArtCollectionCard";
 import { getTopCollections } from "@/lib/actions/collection.action";
 
 export async function generateMetadata() {
-  const arts = await getTopCollections({ type: "art" });
+  const arts = await getTopCollections({
+    type: "ART",
+    path: "/art-collections",
+  });
 
   return {
     title: "Arts Collections",
@@ -21,7 +24,10 @@ export async function generateMetadata() {
 }
 
 const Page = async () => {
-  const arts = await getTopCollections({ type: "art" });
+  const arts = await getTopCollections({
+    type: "ART",
+    path: "/art-collections",
+  });
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
