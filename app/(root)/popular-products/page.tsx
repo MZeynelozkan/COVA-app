@@ -3,10 +3,30 @@ import React from "react";
 import ProductCollectionCards from "@/components/cards/ProductCollectionCars";
 import { getTopCollections } from "@/lib/actions/collection.action";
 
+export async function generateMetadata() {
+  const products = await getTopCollections({
+    type: "PRODUCT",
+    path: "/product-collections",
+  });
+
+  return {
+    title: "Products Collections",
+    description: "Explore the product collections",
+    keywords: products.map((item) => item.name).join(", "),
+    openGraph: {
+      title: "Products Collections",
+      description: "Explore the product collections",
+      images: products.map(
+        (item) => item.items[0]?.image || "https://via.placeholder.com/300"
+      ), // Fallback image
+    },
+  };
+}
+
 const Page = async () => {
   const products = await getTopCollections({
     type: "PRODUCT",
-    path: "/popular-products",
+    path: "/product-collections",
   });
 
   console.log(products);
