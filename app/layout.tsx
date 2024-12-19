@@ -19,6 +19,18 @@ export const metadata: Metadata = {
   title: "COVA",
   description: "Sanat, müzik ve ürün koleksiyonlarını keşfedin",
   keywords: "sanat, müzik, koleksiyonlar, puanlama, keşfet, etkileşim, içerik",
+  openGraph: {
+    title: "COVA",
+    description: "Sanat, müzik ve ürün koleksiyonlarını keşfedin",
+    images: [
+      {
+        url: "https://via.placeholder.com/300",
+        width: 300,
+        height: 300,
+        alt: "COVA",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
