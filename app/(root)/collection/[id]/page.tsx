@@ -11,13 +11,36 @@ import { ParamsProps } from "@/types/types";
 
 import Error from "./error";
 
+// Generate dynamic metadata
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const collection = await getCollectionById({ id });
+
+  if (!collection) {
+    return {
+      title: "Collection Not Found",
+      description: "The requested collection could not be found.",
+    };
+  }
+
+  return {
+    title: `${collection.name} - Collection Details`,
+    description: `Explore the ${collection.name} collection, which includes ${collection.items.length} items.`,
+    keywords: `${collection.name}, collection, ${collection.items.map(item => item.name).join(", ")}`,
+    openGraph: {
+      title: `${collection.name} - Collection Details`,
+      description: `Explore the ${collection.name} collection, which includes ${collection.items.length} items.`,
+      images: [collection.items[0]?.image || "https://via.placeholder.com/300"], // Fallback image
+    },
+  };
+}
+
 const Page = async ({ params }: ParamsProps) => {
   const { id } = params;
   const user = await getUser();
-
   const collection = await getCollectionById({ id });
 
-  if (!collection) <Error />;
+  if (!collection) return <Error />;
 
   return (
     <div className="flex size-full min-h-screen flex-col bg-white p-6 dark:bg-gray-900">
@@ -51,8 +74,6 @@ const Page = async ({ params }: ParamsProps) => {
             className="w-full max-w-[300px] overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"
           >
             <div className="relative h-72 w-full">
-              {" "}
-              {/* Fixed height container for images */}
               <Image
                 src={item.image || "https://via.placeholder.com/300"} // Fallback image URL
                 alt={item.name}
