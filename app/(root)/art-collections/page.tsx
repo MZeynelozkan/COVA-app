@@ -1,10 +1,10 @@
 import React from "react";
 
 import ArtCollectionCard from "@/components/cards/ArtCollectionCard";
-import { getArtCollections } from "@/lib/actions/collection.action";
+import { getTopCollections } from "@/lib/actions/collection.action";
 
 export async function generateMetadata() {
-  const arts = await getArtCollections();
+  const arts = await getTopCollections({ type: "art" });
 
   return {
     title: "Arts Collections",
@@ -14,14 +14,14 @@ export async function generateMetadata() {
       title: "Arts Collections",
       description: "Explore the arts collections",
       images: arts.map(
-        (item) => item.image || "https://via.placeholder.com/300"
+        (item) => item.items[0]?.image || "https://via.placeholder.com/300"
       ), // Fallback image
     },
   };
 }
 
 const Page = async () => {
-  const arts = await getArtCollections();
+  const arts = await getTopCollections({ type: "art" });
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
