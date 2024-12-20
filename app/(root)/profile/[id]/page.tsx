@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const user = await getUserById(params.id);
 
   return {
-    title: `${user?.name}'s Profile | MyApp`,
+    title: `${user?.name}'s Profile | COVA`,
     description: `${user?.name} joined on ${formatDate(
       user?.createdAt!
     )}. Explore their collections and saved items.`,
