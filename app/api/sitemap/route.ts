@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const baseUrl = "https://your-website.com"; // Kendi sitenizin URL'sini yazın.
+  const baseUrl = "https://www.cova-app.com.tr"; // Kendi sitenizin URL'sini yazın.
 
   // Statik sayfa yolları
   const staticPaths = [
