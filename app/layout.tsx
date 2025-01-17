@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: "Sanat, müzik ve ürün koleksiyonlarını keşfedin",
     images: [
       {
-        url: "https://via.placeholder.com/300",
+        url: "./favicon.ico",
         width: 300,
         height: 300,
         alt: "COVA",
