@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   keywords: "sanat, müzik, koleksiyonlar, puanlama, keşfet, etkileşim, içerik",
   icons: {
     icon: {
-      url: "./favicon.ico",
+      url: "./icon.ico",
     },
   },
   openGraph: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: "Sanat, müzik ve ürün koleksiyonlarını keşfedin",
     images: [
       {
-        url: "./favicon.ico",
+        url: "./icon.ico",
         width: 300,
         height: 300,
         alt: "COVA",
